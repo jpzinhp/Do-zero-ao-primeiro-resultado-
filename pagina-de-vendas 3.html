@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Do Zero ao Primeiro Resultado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F1F5F9; --surface:#FFFFFF; --ink:#0E2A47; --muted:#4A5F78; --line:#D5DEE8;
+  --accent:#FFB400; --accent-ink:#1A1300; --teal:#0F8B8D; --dark:#0E2A47; --dark-text:#EAF1F8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0A1A2C;--surface:#102540;--ink:#EAF1F8;--muted:#9BB0C6;--line:#22405F;--dark:#06111F;}
+}
+:root[data-theme="dark"]{--bg:#0A1A2C;--surface:#102540;--ink:#EAF1F8;--muted:#9BB0C6;--line:#22405F;--dark:#06111F;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:17px;line-height:1.6}
+h1,h2,h3{font-family:'Bricolage Grotesque','Arial Narrow',system-ui,sans-serif;line-height:1.08;margin:0;letter-spacing:-.02em}
+p{margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+section{padding:76px 0}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:18px;text-decoration:none;padding:17px 30px;border-radius:12px;box-shadow:0 6px 0 #B98100;transition:transform .12s,box-shadow .12s;text-align:center}
+.btn:hover{transform:translateY(2px);box-shadow:0 4px 0 #B98100}
+.btn:active{transform:translateY(6px);box-shadow:0 0 0 #B98100}
+.btn:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.small{font-size:14px;color:var(--muted)}
+
+/* HERO */
+.hero{padding:56px 0 40px}
+.hero h1{font-size:clamp(38px,7vw,70px);font-weight:800;max-width:14ch}
+.hero .lead{font-size:clamp(18px,2.4vw,21px);color:var(--muted);max-width:52ch;margin:22px 0 30px}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.path{margin-top:44px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 18px 10px}
+.path svg{width:100%;height:auto;display:block}
+.path .draw{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.4s .3s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.path .draw{animation:none;stroke-dashoffset:0}html{scroll-behavior:auto}}
+
+/* PROBLEM */
+.problem h2,.split h2,.who h2,.faq h2,.final h2,.steps h2{font-size:clamp(30px,5vw,46px);font-weight:700;max-width:20ch}
+.problem .cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:34px}
+.problem p{color:var(--muted);margin-bottom:16px;max-width:60ch}
+.problem .pull{border-left:5px solid var(--accent);padding:6px 0 6px 22px;font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,3vw,28px);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+
+/* STEPS: sequência real */
+.steps{background:var(--dark);color:var(--dark-text)}
+.steps h2{color:#fff}
+.steps .sub{color:#A9BDD2;max-width:56ch;margin-top:14px}
+.timeline{list-style:none;margin:44px 0 0;padding:0;position:relative}
+.timeline:before{content:"";position:absolute;left:21px;top:8px;bottom:8px;width:3px;background:#2B4A6B}
+.timeline li{position:relative;padding:0 0 34px 68px}
+.timeline li:last-child{padding-bottom:0}
+.timeline .dot{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--dark);border:3px solid var(--accent);display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:var(--accent)}
+.timeline li:last-child .dot{background:var(--accent);color:var(--accent-ink)}
+.timeline h3{font-size:24px;color:#fff;margin-bottom:6px}
+.timeline p{color:#A9BDD2;max-width:58ch}
+
+/* WHAT YOU GET */
+.split .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.split .item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}
+.split .item:nth-child(1){border-top:5px solid var(--teal)}
+.split .item:nth-child(2){border-top:5px solid var(--accent)}
+.split .item:nth-child(3){border-top:5px solid var(--ink)}
+.split h3{font-size:22px;margin-bottom:8px}
+.split .item p{color:var(--muted);font-size:16px}
+
+/* WHO */
+.who{background:var(--surface);border-block:1px solid var(--line)}
+.who .lists{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:34px}
+.who h3{font-size:20px;margin-bottom:14px}
+.who ul{list-style:none;padding:0;margin:0}
+.who li{padding:11px 0 11px 34px;border-bottom:1px solid var(--line);position:relative}
+.who li:before{content:"";position:absolute;left:0;top:16px;width:18px;height:18px;border-radius:50%}
+.who .yes li:before{background:var(--teal)}
+.who .no li:before{background:transparent;border:3px solid var(--muted)}
+.who .yes li:after{content:"";position:absolute;left:6px;top:20px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+/* OFFER */
+.offer{text-align:center}
+.offer .box{max-width:680px;margin:0 auto;background:var(--surface);border:2px solid var(--ink);border-radius:22px;padding:44px 28px;box-shadow:10px 10px 0 var(--accent)}
+.offer h2{font-size:clamp(30px,5vw,44px);font-weight:800;margin:0 auto 12px}
+.offer .box p{color:var(--muted);max-width:46ch;margin:0 auto 26px}
+.offer .btn{width:100%;max-width:420px}
+.offer .secure{margin-top:18px}
+
+/* GRUPO WHATSAPP */
+.group{padding:0 0 76px}
+.group .box{max-width:680px;margin:0 auto;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:34px 24px}
+.group h2{font-size:clamp(26px,4.5vw,36px);font-weight:800;margin-bottom:22px}
+.btn-wa{display:inline-block;background:#1FA855;color:#fff;font-weight:600;font-size:18px;text-decoration:none;padding:17px 30px;border-radius:12px;box-shadow:0 6px 0 #147A3B;transition:transform .12s,box-shadow .12s}
+.btn-wa:hover{transform:translateY(2px);box-shadow:0 4px 0 #147A3B}
+.btn-wa:active{transform:translateY(6px);box-shadow:0 0 0 #147A3B}
+.btn-wa:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+
+/* FAQ */
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq details:first-of-type{margin-top:28px;border-top:1px solid var(--line)}
+.faq summary{cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-size:28px;line-height:1;color:var(--teal);transition:transform .2s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:12px;max-width:62ch}
+
+/* FINAL */
+.final{background:var(--dark);color:#fff;text-align:center}
+.final h2{color:#fff;margin:0 auto 16px;font-size:clamp(32px,5.5vw,52px)}
+.final p{color:#A9BDD2;max-width:50ch;margin:0 auto 30px}
+footer{padding:28px 0 110px;text-align:center}
+
+/* sticky mobile CTA */
+.sticky{display:none}
+@media (max-width:760px){
+  section{padding:56px 0}
+  .problem .cols,.who .lists,.split .grid{grid-template-columns:1fr}
+  .sticky{display:block;position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);z-index:10}
+  .sticky .btn{display:block;padding:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Do zero ao seu primeiro resultado.</h1>
+    <p class="lead">Um caminho direto, em ordem, para quem está começando e quer parar de girar em círculos. Você sabe exatamente o que fazer hoje, amanhã e na semana seguinte até ver o primeiro resultado real.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://pay.kiwify.com.br/pC1oyqC">Quero começar agora</a>
+      <span class="small">Pagamento seguro pela Kiwify</span>
+    </div>
+
+    <div class="path" aria-hidden="true">
+      <svg viewBox="0 0 900 200" role="img">
+        <line x1="40" y1="160" x2="860" y2="160" stroke="var(--line)" stroke-width="2"/>
+        <path class="draw" d="M40 160 C 200 160, 220 110, 360 110 S 560 120, 640 70 S 800 40, 860 40" fill="none" stroke="var(--teal)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="40" cy="160" r="12" fill="var(--ink)"/>
+        <circle cx="860" cy="40" r="16" fill="var(--accent)" stroke="var(--ink)" stroke-width="3"/>
+        <text x="40" y="192" font-family="Instrument Sans,sans-serif" font-size="18" fill="var(--muted)" text-anchor="start">Ponto zero</text>
+        <text x="860" y="20" font-family="Instrument Sans,sans-serif" font-size="18" font-weight="600" fill="var(--ink)" text-anchor="end">Primeiro resultado</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="problem">
+  <div class="wrap">
+    <h2>Começar sem direção custa tempo e dinheiro.</h2>
+    <div class="cols">
+      <div>
+        <p>Você estuda um pouco aqui, testa uma coisa ali, assiste a mais um vídeo e, no fim da semana, sente que não saiu do lugar.</p>
+        <p>O problema raramente é falta de esforço. É falta de ordem: fazer as coisas certas na sequência errada, ou tentar tudo ao mesmo tempo.</p>
+      </div>
+      <div class="pull">Quem chega ao primeiro resultado não fez mais coisas. Fez as certas, na ordem certa.</div>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+    <h2>O caminho, etapa por etapa.</h2>
+    <p class="sub">Cada etapa prepara a seguinte. Você não precisa adivinhar o próximo passo.</p>
+    <ol class="timeline">
+      <li><span class="dot">1</span><h3>Fundação</h3><p>Entenda o essencial e organize o ponto de partida, sem excesso de teoria e sem pular o que importa.</p></li>
+      <li><span class="dot">2</span><h3>Primeira ação prática</h3><p>Saia do planejamento e coloque em prática o primeiro passo, com orientação clara do que fazer.</p></li>
+      <li><span class="dot">3</span><h3>Ajuste e consistência</h3><p>Corrija a rota com base no que você viu acontecer e crie o ritmo que sustenta o avanço.</p></li>
+      <li><span class="dot">4</span><h3>Primeiro resultado</h3><p>Chegue ao primeiro resultado concreto, aquele que muda sua confiança e mostra que o método funciona.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="split">
+  <div class="wrap">
+    <h2>O que você leva ao entrar.</h2>
+    <div class="grid">
+      <div class="item"><h3>Clareza</h3><p>Um roteiro objetivo que elimina a dúvida do "por onde eu começo?".</p></div>
+      <div class="item"><h3>Ação</h3><p>Conteúdo pensado para você aplicar, não só assistir e guardar.</p></div>
+      <div class="item"><h3>Resultado</h3><p>Foco no que leva ao primeiro resultado, sem enrolação no meio do caminho.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="who">
+  <div class="wrap">
+    <h2>Isto é para você?</h2>
+    <div class="lists">
+      <div class="yes">
+        <h3>É para você se</h3>
+        <ul>
+          <li>Está começando do zero e quer um caminho claro</li>
+          <li>Já tentou por conta própria e se perdeu no meio</li>
+          <li>Quer aplicar de verdade, não só consumir conteúdo</li>
+          <li>Está disposto a dedicar tempo para executar</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h3>Não é para você se</h3>
+        <ul>
+          <li>Procura promessa de resultado sem esforço</li>
+          <li>Não pretende colocar nada em prática</li>
+          <li>Quer atalhos que ignoram o básico</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer" id="oferta">
+  <div class="wrap">
+    <div class="box">
+      <h2>Comece hoje o seu caminho até o primeiro resultado.</h2>
+      <p>Clique no botão, finalize a compra em ambiente seguro e receba o acesso para dar o primeiro passo.</p>
+      <a class="btn" href="https://pay.kiwify.com.br/pC1oyqC">Garantir meu acesso agora</a>
+      <p class="small secure">Compra processada pela Kiwify. Direito de arrependimento de 7 dias, conforme o Código de Defesa do Consumidor.</p>
+    </div>
+  </div>
+</section>
+
+<section class="group">
+  <div class="wrap">
+    <div class="box">
+      <h2>Sua vaga não está garantida ainda.</h2>
+      <a class="btn-wa" href="https://chat.whatsapp.com/FYYEWhURzXuCRLlqDlh8b6?mode=gi_t">Quero entrar no grupo de WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Perguntas frequentes</h2>
+    <details>
+      <summary>Preciso ter experiência para começar?</summary>
+      <p>Não. O conteúdo parte do zero e segue uma ordem lógica, então você não precisa de conhecimento prévio.</p>
+    </details>
+    <details>
+      <summary>Como recebo o acesso?</summary>
+      <p>Logo após a confirmação do pagamento, o acesso é enviado para o e-mail usado na compra.</p>
+    </details>
+    <details>
+      <summary>Quais formas de pagamento posso usar?</summary>
+      <p>O checkout da Kiwify aceita cartão de crédito com parcelamento, além de outras opções disponíveis na tela de pagamento.</p>
+    </details>
+    <details>
+      <summary>E se eu não gostar?</summary>
+      <p>Você tem 7 dias após a compra para solicitar o cancelamento e o reembolso, conforme o Código de Defesa do Consumidor.</p>
+    </details>
+    <details>
+      <summary>Quanto tempo leva para ver o primeiro resultado?</summary>
+      <p>Depende do seu ritmo e da sua dedicação. O caminho foi montado para encurtar essa distância, mas o resultado vem da aplicação.</p>
+    </details>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>O primeiro resultado começa na primeira decisão.</h2>
+    <p>Você já sabe o que quer. Agora falta o caminho certo até lá.</p>
+    <a class="btn" href="https://pay.kiwify.com.br/pC1oyqC">Quero o meu primeiro resultado</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap small">Do Zero ao Primeiro Resultado. Todos os direitos reservados.</div>
+</footer>
+
+<div class="sticky"><a class="btn" href="https://pay.kiwify.com.br/pC1oyqC">Quero começar agora</a></div>
+
+</body>
+</html>
